@@ -5,8 +5,8 @@
 Command to clone the contents of the given repository branch and navigate to the folder
 
   ```bash
-  git clone -b grafana-cluster link
-  cd folder
+  git clone https://github.com/RybenLigst/DIPLOM.git
+  cd grafana
   ```
 
 ## Запуск
