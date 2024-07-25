@@ -1,4 +1,4 @@
-# Grafana Cluster branch
+# Grafana Cluster
 
 ## Downloading
 
