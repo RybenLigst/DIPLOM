@@ -6,7 +6,7 @@ Command to clone the contents of the given repository branch and navigate to the
 
   ```bash
   git clone https://github.com/RybenLigst/DIPLOM.git
-  cd grafana
+  cd Diplom/grafana/
   ```
 
 ## Запуск
