@@ -11,7 +11,7 @@ Command to clone the contents of the given repository branch and navigate to the
 
 ## Запуск
 
-Для запуску необхідно використовувати Docker Compose. Ви можете використовувати команду:
+You need to use Docker Compose to run it. You can use the command:
 
 ```shell
 docker-compose -f ./docker-compose.grafana.yaml up -d
