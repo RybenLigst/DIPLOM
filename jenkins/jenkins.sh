@@ -1,6 +1,6 @@
 #!/bin/bash
  
-# Add user to Docker group (if script #3 is desired)
+# Add user to Docker group
 read -p "Add user to Docker group? (y/N): " add_to_docker
 if [[ "$add_to_docker" =~ ^[Yy]$ ]]; then
   read -p "Enter username: " username
@@ -42,7 +42,7 @@ docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 # Generate SSH key inside Jenkins Docker container
 echo "Generating SSH key inside Jenkins Docker container..."
 docker exec jenkins bash -c 'mkdir -p /var/jenkins_home/.ssh/'
-docker exec -u jenkins jenkins ssh-keygen -t ed25519 -f /var/jenkins_home/.ssh/id_ed25519 -C "sashadrozdov@icloud.com" -q -N ""
+docker exec -u jenkins jenkins ssh-keygen -t ed25519 -f /var/jenkins_home/.ssh/id_ed25519 -C "vasiliprevakky@gmail.com" -q -N ""
  
 # Display Jenkins generated SSH public and private keys
 echo "Jenkins SSH public key:"
