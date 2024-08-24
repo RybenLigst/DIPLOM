@@ -1,11 +1,15 @@
 #!/bin/bash
  
-# Add user to Docker group
-read -p "Add user to Docker group? (y/N): " add_to_docker
-if [[ "$add_to_docker" =~ ^[Yy]$ ]]; then
-  read -p "Enter username: " username
-  sudo usermod -aG docker "$username"
-  sudo service docker restart
+# Ensure Docker group exists
+groupadd -f docker 2>/dev/null
+
+# Add user to Docker group (if not already added)
+if ! id -nG | grep -q docker; then
+  read -p "Add current user to Docker group? (y/N): " add_to_docker
+  if [[ "$add_to_docker" =~ ^[Yy]$ ]]; then
+    sudo usermod -aG docker "$USER"
+    sudo service docker restart
+  fi
 fi
  
 # Set permissions for Docker socket
