@@ -35,7 +35,7 @@ docker run -d \
  
 # Wait for Jenkins to initialize and display initial password
 echo "Waiting for Jenkins to initialize..."
-sleep 30
+sleep 60
 echo "Initial Jenkins admin password:"
 docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
  
