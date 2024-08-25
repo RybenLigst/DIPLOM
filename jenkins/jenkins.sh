@@ -1,5 +1,29 @@
 #!/bin/bash
- 
+
+# Check if Docker is installed
+if ! command -v docker >/dev/null 2>&1; then
+  echo "Docker is not installed. Installing..."
+
+  #  **  Adjust these lines based on your Linux distribution  **
+
+  # For Debian/Ubuntu based systems
+  if [ "$(lsb_release -si)" = "Ubuntu" ] || [ "$(lsb_release -si)" = "Debian" ]; then
+    sudo apt-get update
+    sudo apt-get install -y docker docker-engine
+  # For CentOS/RHEL based systems
+  elif [ "$(cat /etc/os-release | grep -w '^ID=' | cut -d= -f2)" = "centos" ] || [ "$(cat /etc/os-release | grep -w '^ID=' | cut -d= -f2)" = "rhel" ]; then
+    sudo yum update -y
+    sudo yum install -y docker
+  # Add additional checks for other Linux distributions here
+  else
+    echo "Automatic Docker installation not supported for your system. Please install Docker manually."
+    exit 1
+  fi
+
+  # Restart Docker service after installation
+  sudo service docker restart
+fi
+
 # Ensure Docker group exists
 groupadd -f docker 2>/dev/null
 
