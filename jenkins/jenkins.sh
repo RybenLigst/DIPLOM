@@ -54,9 +54,9 @@ docker exec jenkins cat /var/jenkins_home/.ssh/id_ed25519.pub
 echo "Jenkins SSH private key (**WARNING!: Do not share this**):"
 docker exec jenkins cat /var/jenkins_home/.ssh/id_ed25519
  
-# Add GitHub to known hosts for Jenkins container
-echo "Adding GitHub to known hosts for Jenkins container..."
-docker exec jenkins bash -c 'ssh-keyscan -t ed25519 github.com >> /var/jenkins_home/.ssh/known_hosts'
+# Add Bitbucket to known hosts for Jenkins container
+echo "Adding Bitbucket to known hosts for Jenkins container..."
+docker exec jenkins bash -c 'ssh-keyscan -t ed25519 bitbucket.org >> /var/jenkins_home/.ssh/known_hosts'
  
 # Verify known hosts
 echo "Verifying known hosts:"
