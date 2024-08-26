@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Install Docker
+echo "Installing Docker..."
+sudo apt update
+sudo apt install -y docker.io\
+
+# Restart Docker service after installation
+sudo service docker restart
+
 # Ensure Docker group exists
 groupadd -f docker 2>/dev/null
 
