@@ -8,10 +8,18 @@ pipeline {
             }
         }
 
+        stage('Clone GitHub Repo for Docker Compose') {
+            steps {
+                // Клонуємо репозиторій з GitHub для отримання потрібного docker-compose.yml
+                git branch: 'main', credentialsId: 'github-credentials-id', url: 'git@github.com:your-github-user/your-repo.git'
+            }
+        }
+
         stage('Build Docker Images') {
             steps {
                 script {
-                    sh 'docker-compose build'
+                    // Використовуємо docker-compose.yml з GitHub репозиторію
+                    sh 'docker-compose -f /path/to/your-cloned-github-repo/docker-compose.yml build'
                 }
             }
         }
