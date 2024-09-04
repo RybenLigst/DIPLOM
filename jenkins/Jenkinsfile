@@ -11,7 +11,7 @@ pipeline {
         stage('Clone GitHub Repo for Docker Compose') {
             steps {
                 // We clone the repository from GitHub to get the required docker-compose.yml
-                git branch: 'main', credentialsId: 'github-credentials-id', url: 'git@github.com:RybenLigst/DIPLOM.git'
+                git branch: 'main', credentialsId: 'github', url: 'git@github.com:RybenLigst/DIPLOM.git'
             }
         }
 
