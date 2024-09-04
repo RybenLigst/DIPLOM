@@ -8,14 +8,6 @@ pipeline {
             }
         }
 
-        stage('Show Directory Structure') {
-            steps {
-                script {
-                    sh 'ls -R $WORKSPACE'
-                }
-            }
-        }
-
         stage('Clone GitHub Repo for Docker Compose') {
             steps {
                 // Клонуємо репозиторій із GitHub для отримання потрібного docker-compose.yml
