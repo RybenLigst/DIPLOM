@@ -10,16 +10,16 @@ pipeline {
 
         stage('Clone GitHub Repo for Docker Compose') {
             steps {
-                // Клонуємо репозиторій з GitHub для отримання потрібного docker-compose.yml
-                git branch: 'main', credentialsId: 'github-credentials-id', url: 'git@github.com:your-github-user/your-repo.git'
+                // We clone the repository from GitHub to get the required docker-compose.yml
+                git branch: 'main', credentialsId: 'github-credentials-id', url: 'git@github.com:RybenLigst/DIPLOM.git'
             }
         }
 
         stage('Build Docker Images') {
             steps {
                 script {
-                    // Використовуємо docker-compose.yml з GitHub репозиторію
-                    sh 'docker-compose -f /path/to/your-cloned-github-repo/docker-compose.yml build'
+                    // We use docker-compose.yml from the GitHub repository
+                    sh 'docker-compose -f /DIPLOM/jenkins/docker-compose.yml build'
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
         stage('Push Images to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials-id') {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
                         sh """
                         docker tag booking_dev-app flappimen/booking_dev-app:latest
                         docker push flappimen/booking_dev-app:latest
