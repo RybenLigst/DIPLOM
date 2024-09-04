@@ -15,32 +15,10 @@ pipeline {
                 }
             }
         }
-        
-    stages {
-        stage('Clone Bitbucket Repo') {
-            steps {
-                git branch: 'main', credentialsId: 'bitbucket', url: 'git@bitbucket.org:booking_devops/booking_dev.git'
-            }
-        }
-        
-    stages {
-        stage('Clone Bitbucket Repo') {
-            steps {
-                git branch: 'main', credentialsId: 'bitbucket', url: 'git@bitbucket.org:booking_devops/booking_dev.git'
-            }
-        }
-
-        stage('Show Directory Structure') {
-            steps {
-                script {
-                    sh 'ls -R $WORKSPACE'
-                }
-            }
-        }
 
         stage('Clone GitHub Repo for Docker Compose') {
             steps {
-                // We clone the repository from GitHub to get the required docker-compose.yml
+                // Клонуємо репозиторій із GitHub для отримання потрібного docker-compose.yml
                 git branch: 'main', credentialsId: 'github', url: 'git@github.com:RybenLigst/DIPLOM.git'
             }
         }
@@ -48,7 +26,7 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    // We use docker-compose.yml from the GitHub repository
+                    // Використовуємо docker-compose.yml з GitHub репозиторію
                     sh 'docker-compose -f jenkins/docker-compose.yml build'
                 }
             }
@@ -77,7 +55,7 @@ pipeline {
     post {
         always {
             script {
-                // Clean up old builds
+                // Видалення старих білдів
                 def numBuildsToKeep = 5
                 currentBuild.rawBuild.getProject().getBuilds().findAll {
                     it.number < currentBuild.number - numBuildsToKeep
