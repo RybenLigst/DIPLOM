@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Bitbucket Repo') {
             steps {
-                git branch: 'main', credentialsId: 'bitbucket-credentials-id', url: 'https://bitbucket.org/username/repository.git'
+                git branch: 'main', credentialsId: 'bitbucket', url: 'git@bitbucket.org:booking_devops/booking_dev.git'
             }
         }
 
@@ -48,4 +48,5 @@ pipeline {
                 }
             }
         }
-  
+    }
+}
