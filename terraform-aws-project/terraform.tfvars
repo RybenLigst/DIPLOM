@@ -1,1 +1,1 @@
-db_password = "Qwerty-1"
+db_password = "YOUR_PASSWORD"
