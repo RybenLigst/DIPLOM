@@ -7,6 +7,6 @@ spec:
     app: backend
   ports:
     - protocol: TCP
-      port: 8080  # Порт, на якому бек доступний для фронтa
-      targetPort: 8080  # Порт всередині контейнера
+      port: 8080  # The port on which the back is available to the front
+      targetPort: 8080  # Port inside a container
   type: ClusterIP
