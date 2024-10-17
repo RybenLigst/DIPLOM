@@ -17,7 +17,7 @@ provider "aws" {
   region = var.aws_region
 }
 
-# Вихідні дані для передачі в наступний етап
+# Output data for transfer to the next stage
 output "cluster_endpoint" {
   value = aws_eks_cluster.eks.endpoint
 }
