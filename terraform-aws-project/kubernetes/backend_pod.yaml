@@ -1,0 +1,285 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/restartedAt: "2024-10-13T23:04:09+03:00"
+    creationTimestamp: "2024-10-13T20:04:10Z"
+    generateName: backend-7878bf4b8d-
+    labels:
+      app: backend
+      pod-template-hash: 7878bf4b8d
+    name: backend-7878bf4b8d-fb4x6
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: backend-7878bf4b8d
+      uid: 20d5dfcf-7f3d-4918-a406-d4c40c999af2
+    resourceVersion: "23115"
+    uid: c0de8257-547b-4053-afd0-e0b7b4da4346
+  spec:
+    automountServiceAccountToken: true
+    containers:
+    - env:
+      - name: DB_HOST
+        value: database-service
+      - name: DB_PORT
+        value: "5432"
+      - name: DB_NAME
+        value: booking
+      - name: DB_USER
+        value: krot
+      - name: DB_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            key: password
+            name: db-password-secret
+            optional: false
+      image: flappimen/booking_api:latest
+      imagePullPolicy: Always
+      name: backend
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-8vfpq
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-10-0-2-156.eu-north-1.compute.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    shareProcessNamespace: false
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-8vfpq
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2024-10-13T20:04:10Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2024-10-13T20:20:42Z"
+      message: 'containers with unready status: [backend]'
+      reason: ContainersNotReady
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2024-10-13T20:20:42Z"
+      message: 'containers with unready status: [backend]'
+      reason: ContainersNotReady
+      status: "False"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2024-10-13T20:04:10Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://40902260bfa97600d4d420925ff23029956a3efafdce72234f4271f57f54f4ce
+      image: docker.io/flappimen/booking_api:latest
+      imageID: docker.io/flappimen/booking_api@sha256:8d9a77b24c912de0049270c94b18e5bab83e82afd6505da2cf107db9317fa6c1
+      lastState:
+        terminated:
+          containerID: containerd://40902260bfa97600d4d420925ff23029956a3efafdce72234f4271f57f54f4ce
+          exitCode: 139
+          finishedAt: "2024-10-13T20:20:40Z"
+          reason: Error
+          startedAt: "2024-10-13T20:20:38Z"
+      name: backend
+      ready: false
+      restartCount: 8
+      started: false
+      state:
+        waiting:
+          message: back-off 5m0s restarting failed container=backend pod=backend-7878bf4b8d-fb4x6_default(c0de8257-547b-4053-afd0-e0b7b4da4346)
+          reason: CrashLoopBackOff
+    hostIP: 10.0.2.156
+    phase: Running
+    podIP: 10.0.2.205
+    podIPs:
+    - ip: 10.0.2.205
+    qosClass: BestEffort
+    startTime: "2024-10-13T20:04:10Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/restartedAt: "2024-10-13T23:04:09+03:00"
+    creationTimestamp: "2024-10-13T20:04:11Z"
+    generateName: backend-7878bf4b8d-
+    labels:
+      app: backend
+      pod-template-hash: 7878bf4b8d
+    name: backend-7878bf4b8d-wjgnc
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: backend-7878bf4b8d
+      uid: 20d5dfcf-7f3d-4918-a406-d4c40c999af2
+    resourceVersion: "23075"
+    uid: c658dee9-4e57-4570-a93c-edc66e66834c
+  spec:
+    automountServiceAccountToken: true
+    containers:
+    - env:
+      - name: DB_HOST
+        value: database-service
+      - name: DB_PORT
+        value: "5432"
+      - name: DB_NAME
+        value: booking
+      - name: DB_USER
+        value: krot
+      - name: DB_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            key: password
+            name: db-password-secret
+            optional: false
+      image: flappimen/booking_api:latest
+      imagePullPolicy: Always
+      name: backend
+      ports:
+      - containerPort: 8080
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-tcxh6
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: ip-10-0-2-155.eu-north-1.compute.internal
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    shareProcessNamespace: false
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-tcxh6
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2024-10-13T20:04:11Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2024-10-13T20:20:32Z"
+      message: 'containers with unready status: [backend]'
+      reason: ContainersNotReady
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2024-10-13T20:20:32Z"
+      message: 'containers with unready status: [backend]'
+      reason: ContainersNotReady
+      status: "False"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2024-10-13T20:04:11Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://2378946b5a63ee5dac5ab59efd27e521f4330537f739a0f6709500b73c16aeb5
+      image: docker.io/flappimen/booking_api:latest
+      imageID: docker.io/flappimen/booking_api@sha256:8d9a77b24c912de0049270c94b18e5bab83e82afd6505da2cf107db9317fa6c1
+      lastState:
+        terminated:
+          containerID: containerd://2378946b5a63ee5dac5ab59efd27e521f4330537f739a0f6709500b73c16aeb5
+          exitCode: 139
+          finishedAt: "2024-10-13T20:20:31Z"
+          reason: Error
+          startedAt: "2024-10-13T20:20:28Z"
+      name: backend
+      ready: false
+      restartCount: 8
+      started: false
+      state:
+        waiting:
+          message: back-off 5m0s restarting failed container=backend pod=backend-7878bf4b8d-wjgnc_default(c658dee9-4e57-4570-a93c-edc66e66834c)
+          reason: CrashLoopBackOff
+    hostIP: 10.0.2.155
+    phase: Running
+    podIP: 10.0.2.128
+    podIPs:
+    - ip: 10.0.2.128
+    qosClass: BestEffort
+    startTime: "2024-10-13T20:04:11Z"
+kind: List
+metadata:
+  resourceVersion: ""
