@@ -11,10 +11,12 @@ services:
       - "5022:5432"
     environment:
       - POSTGRES_USER=krot
-      - POSTGRES_PASSWORD=p%rSDj4Imds07djc**dmUntdOiduyd3dZ_#WTi4B9Zo
       - POSTGRES_DB=booking
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db_password
     networks:
       - myAppNetwork
+    secrets:
+      - db_password
     volumes:
     #   - c:/web/booking/postgresql:/var/lib/postgresql/data  # Use the volume name msvol here
        - /data/postgresql/data:/var/lib/postgresql/data
@@ -52,3 +54,7 @@ services:
     image: tanmos/booking_client
     ports:
       - "8526:80"
+
+secrets:
+  db_password:
+    file: ./secrets/postgres_password.txt
