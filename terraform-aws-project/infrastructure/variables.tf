@@ -51,3 +51,21 @@ variable "grafana_ami_id" {
   type        = string
   default     = "ami-08eb150f611ca277f"
 }
+
+variable "allowed_ssh_cidrs" {
+  description = "List of CIDR blocks allowed to access SSH on EC2 instances"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
+variable "allowed_jenkins_cidrs" {
+  description = "List of CIDR blocks allowed to access Jenkins UI"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
+variable "allowed_grafana_cidrs" {
+  description = "List of CIDR blocks allowed to access Grafana UI"
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}

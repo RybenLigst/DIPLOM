@@ -31,7 +31,7 @@ resource "kubernetes_deployment" "frontend" {
           }
           env {
             name  = "REACT_APP_API_URL"
-            value = ""  # Тимчасово залишаємо порожнім або вкажіть інший URL
+            value = "http://backend-service.default.svc.cluster.local:8080"
           }
           resources {
             requests = {
@@ -107,7 +107,7 @@ resource "kubernetes_deployment" "backend" {
        container {
          image             = "flappimen/booking_api:v1.0.6"  
          name              = "backend"
-         image_pull_policy = "Always"  # Гарантія завантаження останнього образу
+         image_pull_policy = "IfNotPresent"
          port {
            container_port = 8080
          }

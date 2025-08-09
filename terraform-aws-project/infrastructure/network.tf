@@ -12,6 +12,34 @@ resource "aws_s3_bucket" "db_backup_bucket" {
   }
 }
 
+resource "aws_s3_bucket_versioning" "db_backup_bucket_versioning" {
+  bucket = aws_s3_bucket.db_backup_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "db_backup_bucket_sse" {
+  bucket = aws_s3_bucket.db_backup_bucket.id
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "db_backup_bucket_lifecycle" {
+  bucket = aws_s3_bucket.db_backup_bucket.id
+
+  rule {
+    id     = "expire-noncurrent-versions"
+    status = "Enabled"
+    noncurrent_version_expiration {
+      noncurrent_days = 30
+    }
+  }
+}
+
 resource "aws_s3_bucket_public_access_block" "db_backup_bucket_public_access_block" {
   bucket = aws_s3_bucket.db_backup_bucket.id
 

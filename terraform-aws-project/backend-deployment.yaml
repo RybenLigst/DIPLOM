@@ -12,9 +12,11 @@ spec:
       labels:
         app: backend
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: backend
-        image: flappimen/booking_api:latest
+        image: flappimen/booking_api:v1.0.6
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080  
         env:
@@ -34,3 +36,24 @@ spec:
             secretKeyRef:
               name: db-password-secret
               key: password
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        securityContext:
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true

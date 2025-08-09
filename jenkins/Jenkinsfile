@@ -1,17 +1,24 @@
 pipeline {
     agent any
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
 
     stages {
         stage('Clone Bitbucket Repo') {
             steps {
-                git branch: 'main', credentialsId: 'bitbucket', url: 'git@bitbucket.org:booking_devops/booking_dev.git'
+                dir('booking_dev') {
+                    git branch: 'main', credentialsId: 'bitbucket', url: 'git@bitbucket.org:booking_devops/booking_dev.git'
+                }
             }
         }
 
         stage('Clone GitHub Repo for Docker Compose') {
             steps {
                 // Клонуємо репозиторій із GitHub для отримання потрібного docker-compose.yml
-                git branch: 'main', credentialsId: 'github', url: 'git@github.com:RybenLigst/DIPLOM.git'
+                dir('compose_repo') {
+                    git branch: 'main', credentialsId: 'github', url: 'git@github.com:RybenLigst/DIPLOM.git'
+                }
             }
         }
 
@@ -19,7 +26,7 @@ pipeline {
             steps {
                 script {
                     // Використовуємо docker-compose.yml з GitHub репозиторію
-                    sh 'docker-compose -f jenkins/docker-compose.yml build'
+                    sh 'docker-compose -f compose_repo/jenkins/docker-compose.yml build'
                 }
             }
         }

@@ -3,12 +3,17 @@ name: monitoring
 services:
   grafana:
     image: grafana/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana_admin_password
     ports:
       - "3000:3000"
     volumes:
       - grafana-data:/var/lib/grafana
       - ./configs/grafana/datasources:/etc/grafana/provisioning/datasources/
       - ./configs/grafana/dashboards:/etc/grafana/provisioning/dashboards/
+    secrets:
+      - grafana_admin_password
 
   prometheus:
     image: prom/prometheus
@@ -65,3 +70,7 @@ volumes:
   grafana-data:
   prom-data:
   alert-data:
+
+secrets:
+  grafana_admin_password:
+    file: ./secrets/grafana_admin_password.txt

@@ -10,7 +10,8 @@ resource "aws_security_group" "ec2_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # SSH
+    cidr_blocks = var.allowed_ssh_cidrs
+    description = "SSH access"
   }
   ingress {
     from_port   = 80
@@ -28,13 +29,15 @@ resource "aws_security_group" "ec2_sg" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Jenkins
+    cidr_blocks = var.allowed_jenkins_cidrs
+    description = "Jenkins UI"
   }
   ingress {
     from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Grafana
+    cidr_blocks = var.allowed_grafana_cidrs
+    description = "Grafana UI"
   }
   egress {
     from_port   = 0
